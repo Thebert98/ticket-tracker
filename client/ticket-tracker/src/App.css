@@ -14,9 +14,8 @@
 }
 
 .App-header {
-  background: url('./imgs/navbar.jpg') no-repeat center center fixed; 
+  background: url('./imgs/navbar.jpg') no-repeat center center fixed;
   background-size: cover;
-  
   height: 100px;
   padding: 20px;
   color: white;
@@ -26,11 +25,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
- 
-  color: #ffffff; /* White text for visibility */
-  font-size: 18px; /* Larger font size */
-  font-weight: bold; /* Bold font weight */
-  padding: 10px 20px; /* Adequate padding */
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
 }
 
 .left-nav, .right-nav {
@@ -48,18 +46,18 @@
 }
 
 .logo-link img {
-  height: 70px; /* Increase logo size */
+  height: 70px;
 }
 
 .nav-link {
-  text-decoration: none; /* No underline */
-  color: inherit; /* Inherits white color */
-  padding: 10px 15px; /* Padding for clickable area */
+  text-decoration: none;
+  color: inherit;
+  padding: 10px 15px;
 }
 
 .nav-link:hover, .nav-link.active {
-  background-color: #60b8a4; /* Lighter green for hover and active */
-  border-bottom: 3px solid #ffffff; /* White underline for active section */
+  background-color: #60b8a4;
+  border-bottom: 3px solid #ffffff;
 }
 
 .landingPage {
@@ -72,11 +70,11 @@
 }
 
 .createTicket {
-  background-color: #e0e0e0; /* Slightly darker background */
+  background-color: #e0e0e0;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  max-width: 600px; /* Slightly wider */
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -103,14 +101,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.error button {
-  background-color: #3e8e7e;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+
+.error button,
 .createTicket input[type="submit"] {
   background-color: #3e8e7e;
   color: white;
@@ -125,11 +117,11 @@
 }
 
 .ticketCreated {
-  background-color: #ffffff; /* Light background for contrast */
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  max-width: 700px; /* Slightly wider */
+  max-width: 700px;
   margin: 20px auto;
   text-align: center;
 }

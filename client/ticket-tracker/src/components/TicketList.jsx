@@ -36,6 +36,7 @@ const TicketList = () => {
     const handleStatusChange = (id, newStatus) => {
         API.patch(`tickets/${id}/updateStatus`, { newStatus: newStatus }).then(res => {
             setTickets(tickets.map(ticket => ticket.id === id ? { ...ticket, status: newStatus } : ticket));
+            console.log(res.data.data);
         }).catch(err => {
             console.log("Error changing ticket status: " + err);
             setError("Error changing ticket status");

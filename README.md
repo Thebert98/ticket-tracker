@@ -41,7 +41,7 @@ npm --version
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/ticket-tracker.git
+git clone https://github.com/thebert98/ticket-tracker.git
 cd ticket-tracker
 ```
 
@@ -49,11 +49,11 @@ cd ticket-tracker
 
 ```bash
 # Install frontend dependencies
-cd client
+cd client/ticket-tracker
 npm install
 
 # Install backend dependencies
-cd ../server
+cd ../../server
 npm install
 ```
 
@@ -66,7 +66,7 @@ npm start
 4. In a new terminal, navigate to the client directory and start the React application:
 
 ```bash
-cd client
+cd client/ticket-tracker
 npm start
 ```
 

@@ -1,5 +1,5 @@
 import axios from "axios"
 
 export default axios.create({
-    baseURL:"http://localhost:3100"
+    baseURL:"https://ticket-tracker-hkgl.onrender.com"
 })

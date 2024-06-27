@@ -115,6 +115,7 @@ const TicketList = () => {
                                 <p><span>Ticket #:</span> {ticket.id}</p>
                                 <p><span>Description:</span> {ticket.description.slice(0,100)}...</p>
                                 <p><span>Status:</span> {ticket.status}</p>
+                                <p><span>Created On:</span> {ticket.created_at.split("T")[0]}.</p>
                             </div>
                         </div>
                         {expandedTicketId === ticket.id && (

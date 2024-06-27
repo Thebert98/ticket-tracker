@@ -113,6 +113,7 @@ const TicketList = () => {
                         <div onClick={() => toggleTicket(ticket.id)}>
                             <div className="ticketDetails">
                                 <p><span>Ticket #:</span> {ticket.id}</p>
+                                <p><span>Description:</span> {ticket.description.slice(0,100)}...</p>
                                 <p><span>Status:</span> {ticket.status}</p>
                             </div>
                         </div>

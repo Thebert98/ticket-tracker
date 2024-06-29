@@ -36,6 +36,7 @@ const TicketList = () => {
     const handleStatusChange = (id, newStatus) => {
         API.patch(`tickets/${id}/updateStatus`, { newStatus: newStatus }).then(res => {
             setTickets(tickets.map(ticket => ticket.id === id ? { ...ticket, status: newStatus } : ticket));
+            alert("Status changed Successfully, check logs for details");
             console.log(res.data.data);
         }).catch(err => {
             console.log("Error changing ticket status: " + err);
@@ -117,6 +118,9 @@ const TicketList = () => {
                                 <p><span>Description:</span> {ticket.description.length <= 100 ? ticket.description: ticket.description.slice(0,100) + "..."}</p>
                                 <p><span>Status:</span> {ticket.status}</p>
                                 <p><span>Created On:</span> {ticket.created_at.split("T")[0]}.</p>
+                                {ticket.updated_at && 
+                                <p><span>Updated On:</span> {ticket.updated_at.split("T")[0]}.</p>
+                                }
                             </div>
                         </div>
                         {expandedTicketId === ticket.id && (
@@ -136,7 +140,7 @@ const TicketList = () => {
                                     <button onClick={handleSendAdminMessage}>Send Response</button>
                                 </div>
                                 <div className="ticketStatus">
-                                    <label>Status:</label>
+                                    <label>Change Ticket Status:</label>
                                     <select value={ticket.status} onChange={(e) => handleStatusChange(ticket.id, e.target.value)}>
                                         <option value="new">New</option>
                                         <option value="in progress">In Progress</option>

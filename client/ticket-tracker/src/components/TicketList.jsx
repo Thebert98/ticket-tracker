@@ -116,7 +116,18 @@ const TicketList = () => {
                             <div className="ticketDetails">
                                 <p><span>Ticket #:</span> {ticket.id}</p>
                                 <p><span>Description:</span> {ticket.description.length <= 100 ? ticket.description: ticket.description.slice(0,100) + "..."}</p>
-                                <p><span>Status:</span> {ticket.status}</p>
+                                <p>
+                                    <span>Status:</span> 
+                                    {ticket.status === "new" ? (
+                                        <span style={{color: "green"}}>New</span>
+                                    ) : ticket.status === "in progress" ? (
+                                        <span style={{color: "#8B8000"}}>In Progress</span>
+                                    ) : ticket.status === "resolved" ? (
+                                        <span style={{color: "red"}}>Resolved</span>
+                                    ) : (
+                                        <span style={{color: "green"}}>New</span>
+                                    )} 
+                                </p>
                                 <p><span>Created On:</span> {ticket.created_at.split("T")[0]}.</p>
                                 {ticket.updated_at && 
                                 <p><span>Updated On:</span> {ticket.updated_at.split("T")[0]}.</p>

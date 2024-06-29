@@ -114,7 +114,7 @@ const TicketList = () => {
                         <div onClick={() => toggleTicket(ticket.id)}>
                             <div className="ticketDetails">
                                 <p><span>Ticket #:</span> {ticket.id}</p>
-                                <p><span>Description:</span> {ticket.description.slice(0,100)}...</p>
+                                <p><span>Description:</span> {ticket.description.length <= 100 ? ticket.description: ticket.description.slice(0,100) + "..."}</p>
                                 <p><span>Status:</span> {ticket.status}</p>
                                 <p><span>Created On:</span> {ticket.created_at.split("T")[0]}.</p>
                             </div>

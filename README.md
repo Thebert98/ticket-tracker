@@ -3,10 +3,13 @@
 Ticket Tracker is a full-stack web application designed to streamline the process of managing helpdesk tickets. Built using React.js, Node.js, and Supabase, this application facilitates efficient ticket management in an office environment. Users can submit tickets detailing their issues, and admins can manage these tickets through a detailed admin panel.
 
 ## Features
-
-- **User Interface**: Simple forms for users to submit their issues, including fields for name, email, and a description of the problem.
-- **Admin Panel**: Admins can view all tickets with details such as ticket ID, status, requestor's name, and email. They can update the status of tickets, view more detailed information, and contact the requestor directly.
-- **No Authentication**: As this is a mock-up, there is no authentication mechanism in place.
+- **End User Functionality**:
+  - Submit support tickets with fields for name, email, and description of the problem.
+  
+- **Admin Panel Functionality**:
+  - View a summary of submitted tickets, including status.
+  - Drill down into tickets for detailed view and response.
+  - Update the status of tickets to "new", "in progress", or "resolved".
 
 ### Features I Would Add
 
@@ -24,6 +27,20 @@ Ticket Tracker is a full-stack web application designed to streamline the proces
 - **User Dashboard**: Allows users to view the status of their tickets and respond to messages from the admin.
 - **Delete Ticket**: Option to delete tickets when necessary.
 - **Manual Ticket Creation**: Admins can create tickets on behalf of users directly from the admin panel.
+
+## Technology Stack
+- **Front-End**:
+  - React
+  
+- **Back-End**:
+  - Node.js
+  - Express.js
+  
+- **Database**:
+  - Supabase (hosted instance)
+  
+- **Deployment**:
+  - Vercel
 
 ## Getting Started
 
@@ -75,5 +92,3 @@ npm start
 
 - **Submit a Ticket**: Navigate to the main page, fill out the form, and submit your issue.
 - **Admin Panel**: Click on the "Admin Panel" button on the navbar to view all tickets. You can interact with each ticket to view more details or perform actions like sending emails or changing the ticket status.
-
-

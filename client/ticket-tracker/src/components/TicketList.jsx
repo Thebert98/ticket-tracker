@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import API from "../api";
 import loadingImg from "../imgs/loading.gif";
 import '../AdminPanel.css';
+import { supabase } from '../config/supabase';
+import { Snackbar, Alert } from '@mui/material';
 
 const TicketList = () => {
     const [tickets, setTickets] = useState([]);
@@ -10,9 +12,43 @@ const TicketList = () => {
     const [error, setError] = useState(null);
     const [adminMessage, setAdminMessage] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
     const ticketsPerPage = 5;
 
     useEffect(() => {
+        getTickets();
+        const statusUpdate = supabase
+        .channel('public:tickets')
+        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'tickets', }, (payload) => {
+        setTickets(tickets => 
+            tickets.map(ticket => 
+                ticket.id === payload.new.id ? { ...ticket, status: payload.new.status, updated_at: payload.new.updated_at } : ticket
+            )
+        )
+        })
+        .subscribe();
+        const newTicket = supabase
+        .channel('public:tickets')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'tickets', }, (payload) => {
+            
+        console.log('New Ticket Recieved!', payload.new);
+        setSnackbarMessage("New Ticket Recieved!");
+        setSnackbarOpen(true);
+        getTickets()
+        })
+        .subscribe();
+
+  return () => {
+    supabase.removeChannel(statusUpdate);
+    supabase.removeChannel(newTicket);
+
+  };
+
+    }, [tickets]);
+
+    
+    const getTickets = () =>{
         API.get('/tickets').then(res => {
             const tickets = res.data.tickets;
             setTickets(tickets);
@@ -22,8 +58,7 @@ const TicketList = () => {
             setError("Error retrieving tickets");
             setLoading(false);
         })
-    }, []);
-
+    }
     const toggleTicket = (id) => {
         setAdminMessage("")
         if (id === expandedTicketId) {
@@ -36,7 +71,8 @@ const TicketList = () => {
     const handleStatusChange = (id, newStatus) => {
         API.patch(`tickets/${id}/updateStatus`, { newStatus: newStatus }).then(res => {
             setTickets(tickets.map(ticket => ticket.id === id ? { ...ticket, status: newStatus } : ticket));
-            alert("Status changed Successfully, check logs for details");
+            setSnackbarMessage("Status changed successfully, check logs for details");
+            setSnackbarOpen(true);
             console.log(res.data.data);
         }).catch(err => {
             console.log("Error changing ticket status: " + err);
@@ -54,11 +90,13 @@ const TicketList = () => {
 
         if (!trimmedMessage) {
             alert('Message cannot be blank');
+
             return;
         }
         API.post(`tickets/${expandedTicketId}/message`, { message: adminMessage }).then(res => {
             console.log(res.data.data);
-            alert("Message Sent Successfully, check logs for details");
+            setSnackbarMessage("Message sent successfully, check logs for details");
+            setSnackbarOpen(true);
             setAdminMessage("");
         }).catch(err => {
             console.log("Error sending admin message: " + err);
@@ -69,6 +107,9 @@ const TicketList = () => {
     const handleClearError = () =>{
         setError(null)
       }
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
     
     const indexOfLastTicket = currentPage * ticketsPerPage;
     const indexOfFirstTicket = indexOfLastTicket - ticketsPerPage;
@@ -108,6 +149,7 @@ const TicketList = () => {
 
     return (
         <div className="ticketList">
+            
             <h2>Service Request Tickets</h2>
             <ul>
                 {currentTickets.map(ticket => (
@@ -128,9 +170,9 @@ const TicketList = () => {
                                         <span style={{color: "green"}}>New</span>
                                     )} 
                                 </p>
-                                <p><span>Created On:</span> {ticket.created_at.split("T")[0]}.</p>
+                                <p><span>Created On:</span> {ticket.created_at.split("T")[0]}</p>
                                 {ticket.updated_at && 
-                                <p><span>Updated On:</span> {ticket.updated_at.split("T")[0]}.</p>
+                                <p><span>Updated On:</span> {ticket.updated_at.split("T")[0]}</p>
                                 }
                             </div>
                         </div>
@@ -167,6 +209,15 @@ const TicketList = () => {
                 <button onClick={prevPage} hidden={currentPage === 1} disabled={currentPage === 1}>Previous</button>
                 <button onClick={nextPage} hidden={currentPage === Math.ceil(tickets.length / ticketsPerPage)} disabled={currentPage === Math.ceil(tickets.length / ticketsPerPage)}>Next</button>
             </div>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+            >
+                <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </div>
     );
 };

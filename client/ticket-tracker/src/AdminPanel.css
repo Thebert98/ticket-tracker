@@ -39,10 +39,13 @@ body {
     border-radius: 5px;
     margin-bottom: 10px;
     padding: 15px;
-    cursor: pointer;
+    cursor: default;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+}
+.ticketList .fa{
+    cursor: pointer
 }
 
 .ticketList li:hover {
@@ -75,6 +78,7 @@ body {
 .ticketList .expandedTicket {
     background-color: rgba(245, 245, 245, 0.9);
     border-radius: 5px;
+    align-items: center;
     padding: 15px;
     margin-top: 10px;
     display: flex;
@@ -112,7 +116,8 @@ body {
     height: 150px;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -121,7 +126,7 @@ body {
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 100px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -137,7 +142,7 @@ body {
     align-items: flex-start;
 }
 
-.ticketList .ticketStatus label {
+.ticketList label {
     margin-right: 10px;
     font-weight: bold;
 }
@@ -146,6 +151,21 @@ body {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+.ticketList .ticketStatus button {
+    background-color: #a0522d;
+    align-self: center;
+    padding-top: 100px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .loading, .error {

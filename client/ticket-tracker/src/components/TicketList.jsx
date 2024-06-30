@@ -4,6 +4,8 @@ import loadingImg from "../imgs/loading.gif";
 import '../AdminPanel.css';
 import { supabase } from '../config/supabase';
 import { Snackbar, Alert } from '@mui/material';
+import { FaAnglesDown, FaAnglesUp } from "react-icons/fa6";
+
 
 const TicketList = () => {
     const [tickets, setTickets] = useState([]);
@@ -11,6 +13,8 @@ const TicketList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [adminMessage, setAdminMessage] = useState("");
+    const [updatedStatus,setUpdatedStatus] = useState(null)
+    
     const [currentPage, setCurrentPage] = useState(1);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -61,6 +65,7 @@ const TicketList = () => {
     }
     const toggleTicket = (id) => {
         setAdminMessage("")
+        setUpdatedStatus(null)
         if (id === expandedTicketId) {
             setExpandedTicketId(null);
         } else {
@@ -68,7 +73,13 @@ const TicketList = () => {
         }
     };
 
-    const handleStatusChange = (id, newStatus) => {
+    const handleStatusChange = (newStatus) => {
+        console.log(newStatus)
+        setUpdatedStatus(newStatus)
+    }
+    const updateStatus = (id) => {
+        let newStatus = updatedStatus;
+        console.log(newStatus)
         API.patch(`tickets/${id}/updateStatus`, { newStatus: newStatus }).then(res => {
             setTickets(tickets.map(ticket => ticket.id === id ? { ...ticket, status: newStatus } : ticket));
             setSnackbarMessage("Status changed successfully, check logs for details");
@@ -154,7 +165,7 @@ const TicketList = () => {
             <ul>
                 {currentTickets.map(ticket => (
                     <li key={ticket.id}>
-                        <div onClick={() => toggleTicket(ticket.id)}>
+                        <div >
                             <div className="ticketDetails">
                                 <p><span>Ticket #:</span> {ticket.id}</p>
                                 <p><span>Description:</span> {ticket.description.length <= 100 ? ticket.description: ticket.description.slice(0,100) + "..."}</p>
@@ -174,7 +185,11 @@ const TicketList = () => {
                                 {ticket.updated_at && 
                                 <p><span>Updated On:</span> {ticket.updated_at.split("T")[0]}</p>
                                 }
+                                
                             </div>
+                           {expandedTicketId !== ticket.id && (
+                             <FaAnglesDown className="fa" onClick={() => toggleTicket(ticket.id)} />
+                           )}
                         </div>
                         {expandedTicketId === ticket.id && (
                             <div className="expandedTicket">
@@ -184,7 +199,7 @@ const TicketList = () => {
                                 <p><span>Requestor's Email:</span> {ticket.email}</p>
                                 <p><span>Description of Issue:</span> {ticket.description}</p>
                                 <div className="adminMessageField">
-                                    <h4>Respond to Request</h4>
+                                    <label>Respond to Request:</label>
                                     <textarea
                                         placeholder="Respond to the user's request. This will send an email to the user."
                                         value={adminMessage}
@@ -194,12 +209,16 @@ const TicketList = () => {
                                 </div>
                                 <div className="ticketStatus">
                                     <label>Change Ticket Status:</label>
-                                    <select value={ticket.status} onChange={(e) => handleStatusChange(ticket.id, e.target.value)}>
+                                    <select value={updatedStatus || ticket.status} onChange={(e) => handleStatusChange(e.target.value)}>
                                         <option value="new">New</option>
                                         <option value="in progress">In Progress</option>
                                         <option value="resolved">Resolved</option>
                                     </select>
+                                    {updatedStatus && updatedStatus !== ticket.status &&(
+                                        <button onClick={() => updateStatus(ticket.id)}>Update Status</button>
+                                    )}
                                 </div>
+                                <FaAnglesUp className="fa" onClick={() => toggleTicket(ticket.id)}  />
                             </div>
                         )}
                     </li>

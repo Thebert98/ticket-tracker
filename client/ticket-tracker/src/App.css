@@ -57,7 +57,6 @@
 
 .nav-link:hover, .nav-link.active {
   background-color: #60b8a4;
-  border-bottom: 3px solid #ffffff;
 }
 
 .landingPage {
@@ -146,6 +145,15 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+}
+.logo {
+  height: 40px;
+  margin-right: 20px;
+  padding: 5px;
+  border-radius: 50%; 
+}
+.logo:hover {
+  background-color: #60b8a4;
 }
 
 .ticketCreated button:hover {

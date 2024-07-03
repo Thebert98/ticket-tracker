@@ -1,12 +1,12 @@
 const express = require("express");
 const xss = require("xss");
-const ticketData = require("../data/tickets")
+const ticketController = require("../controllers/tickets")
 
 const router = express.Router();
 
 router.get("/",async (req,res)=>{
     try{
-        let data = await ticketData.getAllTickets();
+        let data = await ticketController.getAllTickets();
 
         if(!data){
             res.status(500).json({error:"Internal Server Error: Error fetching all tickets!"});
@@ -28,11 +28,7 @@ router.get("/:id", async (req,res) =>{
             res.status(400).json({error:"Invalid request! An id must be provided!"});
             return
         }
-        if(!/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/.test(id)){
-            res.status(400).json({error:"Invalid request! Not a valid id!"});
-            return
-        }
-        let data = await ticketData.getTicketFromId(id);
+        let data = await ticketController.getTicketFromId(id);
 
         if(!data){
             res.status(500).json({error:"Internal Server Error: Error fetching ticket by id!"});
@@ -72,7 +68,7 @@ router.post("/",async (req,res)=>{
             res.status(400).json({error:"Invalid request! Not a valid email!"});
             return
         }
-        let data = await ticketData.createTicket(name,email,description);
+        let data = await ticketController.createTicket(name,email,description);
 
         if(!data){
             res.status(500).json({error:"Internal Server Error: Error creating ticket!"});
@@ -104,12 +100,7 @@ router.post("/:id/message",async(req,res)=>{
             res.status(400).json({error:"Invalid request! Inputs cannot be all white space!"});
             return
         }
-        if(!/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/.test(id)){
-            res.status(400).json({error:"Invalid request! Not a valid id!"});
-            return
-        }
-
-        let data = await ticketData.adminResponse(id,message)
+        let data = await ticketController.adminResponse(id,message)
 
         if(!data){
             res.status(500).json({error:"Internal Server Error: Error sending admin message!"});
@@ -125,7 +116,10 @@ router.post("/:id/message",async(req,res)=>{
 
 router.patch("/:id/updateStatus",async(req,res)=>{
     try{
+        
         let id = req.params.id;
+        console.log(typeof(id))
+        
         let newStatus = xss(req.body.newStatus);
 
         if(!id | !newStatus){
@@ -140,16 +134,12 @@ router.patch("/:id/updateStatus",async(req,res)=>{
             res.status(400).json({error:"Invalid request! Inputs cannot be all white space!"});
             return
         }
-        if(!/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/.test(id)){
-            res.status(400).json({error:"Invalid request! Not a valid id!"});
-            return
-        }
         if(newStatus !== "new" && newStatus !== "in progress" && newStatus !== "resolved"){
             res.status(400).json({error:"Invalid ticket status"});
             return
         }
 
-        let data = await ticketData.updateTicketStatus(id,newStatus)
+        let data = await ticketController.updateTicketStatus(id,newStatus)
         
 
         if(!data){

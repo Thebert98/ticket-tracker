@@ -76,6 +76,7 @@ async function getTicketFromId(id){
 
 async function updateTicketStatus(id,newStatus){
     try{
+        
         if(!id || !newStatus){
             throw  ("id and newStatus must be provided!");
         }

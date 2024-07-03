@@ -1,31 +1,52 @@
 body {
-    background: url('./imgs/background.jpg') no-repeat center center fixed; 
+    background: url('./imgs/background.jpg') no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
+    color: #333333;
+    margin: 0;
+    padding: 0;
 }
 
 .adminPanel {
     text-align: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 .adminPanel h1 {
     color: #333333;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.adminPanelContent {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.ticketListContainer {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .ticketList {
-    background-color: rgba(255, 245, 230, 0.9);
-    border-radius: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 10px;
+    width: 45%;
+    border: 1px solid #e0e0e0;
+    font-size: 0.9em;
+    margin-right: 0;
 }
 
 .ticketList h2 {
     color: #333333;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
 }
 
 .ticketList ul {
@@ -34,138 +55,205 @@ body {
 }
 
 .ticketList li {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
     border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 15px;
-    cursor: default;
+    margin-bottom: 5px;
+    padding: 10px;
+    cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
 }
-.ticketList .fa{
-    cursor: pointer
-}
 
 .ticketList li:hover {
-    background-color: rgba(245, 245, 245, 0.9);
+    background-color: #f1f1f1;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.ticketList li div {
+.ticketSummary {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
 }
 
-.ticketList .ticketDetails {
+.ticketSummaryDetails {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
-
-.ticketList .ticketDetails p {
-    margin: 0;
-    font-size: 14px;
-}
-
-.ticketList .ticketDetails p span {
-    font-weight: bold;
-}
-
-.ticketList .expandedTicket {
-    background-color: rgba(245, 245, 245, 0.9);
-    border-radius: 5px;
-    align-items: center;
-    padding: 15px;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.ticketList .expandedTicket h3 {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.ticketList .expandedTicket p {
-    margin: 10px 0;
-}
-
-.ticketList .expandedTicket p span {
-    font-weight: bold;
-}
-
-.ticketList .adminMessageField {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.ticketList .adminMessageField h4 {
-    color: #333;
-    margin-bottom: 10px;
-    align-self: flex-start;
-}
-
-.ticketList .adminMessageField textarea {
     width: 100%;
-    height: 150px;
+}
+
+.ticketName, .ticketEmail, .ticketStatus, .ticketCreated {
+    margin: 0;
+    padding: 3px;
+    color: #333333;
+}
+
+.ticketDetailsContainer {
+    background-color: #ffffff;
+    border-radius: 5px;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    margin-top: 10px;
+    width: 55%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    font-size: 0.9em;
+    overflow: hidden; /* Prevent overflow */
+}
+
+.expandedTicket {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.expandedTicketDetails {
+    display: flex;
+    justify-content: space-between;
+  
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
     margin-bottom: 10px;
 }
 
-.ticketList .adminMessageField button {
-    background-color: #a0522d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.expandedTicketDetails p {
+    display: block;
+    padding: 10px;
+    flex: 1 1 20%; /* Adjust flex property for equal width */
+    margin: auto;
+    text-align: center;
+    word-wrap: break-word; /* Prevent overflow */
 }
-
-.ticketList .adminMessageField button:hover {
-    background-color: #8b4513;
-}
-
-.ticketList .ticketStatus {
-    margin-top: 15px;
+.timestamps{
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    margin: auto;
+    flex-direction: row;
+    width: 100%;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    
 }
+.timestamps p {
+    padding: 10px;
+    flex: 1 1 20%; /* Adjust flex property for equal width */
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
-.ticketList label {
-    margin-right: 10px;
+}
+.timestamps p span{
     font-weight: bold;
 }
 
-.ticketList .ticketStatus select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    align-self: center;
+.expandedTicketDetails p span {
+    display: block; /* Ensure span is on top */
+    font-weight: bold;
 }
 
-.ticketList .ticketStatus button {
-    background-color: #a0522d;
-    align-self: center;
-    padding-top: 100px;
+.expandedDescription {
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.expandedDescription span {
+    text-align: center;
+    display: block;
+    font-weight: bold;
+}
+
+.adminMessageField {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.adminMessageField label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+.adminMessageField textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 80px;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+
+.adminMessageField button {
+    background-color: #3e8e7e;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 8px 16px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.adminMessageField button:hover {
+    background-color: #45a049;
+}
+
+.inlineErrorMessage {
+    font-size: small;
+    color: red;
+    margin-top: 5px;
+}
+
+.ticketStatus {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ticketStatus label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+.ticketStatus select {
+    padding: 5px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 0.9em;
+    width: auto;
+}
+
+.ticketStatus button {
+    background-color: #3e8e7e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.ticketStatus button:hover {
+    background-color: #45a049;
 }
 
 .loading, .error {
@@ -174,8 +262,8 @@ body {
 }
 
 .loading img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 }
 
 .error {
@@ -185,20 +273,364 @@ body {
 .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .pagination button {
-    background-color: #a0522d;
+    background-color: #3e8e7e;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
     margin: 0 5px;
     transition: background-color 0.3s ease;
+    font-size: 0.9em;
 }
 
 .pagination button:hover {
-    background-color: #8b4513;
+    background-color: #45a049;
 }
+
+.ticketListMobile {
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid #e0e0e0;
+    font-size: 0.9em;
+}
+
+.ticketListMobile h2 {
+    color: #333333;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.ticketListMobile ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ticketListMobile li {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    cursor: default;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.ticketListMobile .fa {
+    cursor: pointer;
+    align-self: center;
+}
+
+.faUp {
+    cursor: pointer;
+    align-self: center;
+}
+
+
+.ticketListMobile li:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ticketListMobile li div {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+.ticketListMobile .ticketDetailsMobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ticketListMobile .ticketDetailsMobile p {
+    margin: 0;
+    font-size: 14px;
+    color: #333333;
+}
+
+.ticketListMobile .ticketDetailsMobile p span {
+    font-weight: bold;
+}
+
+.ticketListMobile .expandedTicketMobile {
+    background-color: #ffffff;
+    border-radius: 5px;
+    align-self: left;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+}
+
+.ticketListMobile .expandedTicketMobile h3 {
+    color: #333333;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+.ticketListMobile .expandedTicketMobile p {
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.ticketListMobile .expandedTicketMobile p span {
+    font-weight: bold;
+}
+
+.ticketListMobile .adminMessageFieldMobile {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ticketListMobile .adminMessageFieldMobile h4 {
+    color: #333333;
+    margin-bottom: 10px;
+    align-self: flex-start;
+    font-size: 1em;
+}
+
+.ticketListMobile .adminMessageFieldMobile textarea {
+    width: 100%;
+    height: 100px;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 0.9em;
+}
+
+.ticketListMobile .adminMessageFieldMobile button {
+    background-color: #3e8e7e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.ticketListMobile .adminMessageFieldMobile button:hover {
+    background-color: #45a049;
+}
+
+.ticketListMobile .ticketStatusMobile {
+    margin-top: 10px;
+    display: flex;
+    
+    flex-direction: column;
+   
+}
+
+.ticketListMobile label {
+    text-align: center;
+
+    font-weight: bold;
+    color: #333333;
+}
+
+.ticketListMobile .ticketStatusMobile select {
+    padding: 5px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-self: center;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 0.9em;
+    width: auto;
+}
+
+.ticketListMobile .ticketStatusMobile button {
+    background-color: #3e8e7e;
+    align-self: center;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.loading, .error {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.loading img {
+    width: 40px;
+    height: 40px;
+}
+
+.error {
+    color: red;
+}
+
+.paginationMobile {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.paginationMobile button {
+    background-color: #3e8e7e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.paginationMobile button:hover {
+    background-color: #45a049;
+}
+
+.adminMessageFieldMobile .inlineErrorMessageMobile {
+    text-align: left;
+    font-size: small;
+    color: red;
+}
+
+/* New styles for mobile view */
+
+.expandedTicketDetailsMobile {
+    text-align: left;
+    display: block;
+    flex-direction: column;
+    width: 100%; /* Ensure it takes full width */
+    align-items: flex-start;
+}
+
+.expandedTicketDetailsMobile p {
+    text-align: left;
+    font-size: 14px;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    width: 100%; /* Ensure it takes full width */
+}
+
+.expandedTicketDetailsMobile p span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.expandedTicketDescriptionMobile {
+   
+    width: 100%;
+
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid #e0e0e0; 
+    border-bottom: 1px solid #e0e0e0;    
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.expandedTicketDescriptionMobile p {
+    
+    padding: 10px;
+    flex: 1 1 20%; /* Adjust flex property for equal width */
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.expandedTicketDescriptionMobile p span {
+    display: block;
+    font-weight: bold;
+}
+
+/* Responsive styles for mobile view */
+@media (max-width: 768px) {
+    .ticketListMobile {
+        padding: 5px;
+        font-size: 0.8em;
+    }
+
+    .ticketListMobile h2 {
+        font-size: 1em;
+    }
+
+    .ticketListMobile li {
+        padding: 5px;
+    }
+
+    .expandedTicketDetailsMobile p {
+        font-size: 0.8em;
+    }
+
+    .expandedTicketDescriptionMobile p {
+        font-size: 0.8em;
+    }
+
+    .adminMessageFieldMobile textarea {
+        height: 80px;
+    }
+
+    .adminMessageFieldMobile button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+
+    .ticketStatusMobile select,
+    .ticketStatusMobile button {
+        font-size: 0.8em;
+    }
+
+    .paginationMobile button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+    .adminPanel {
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .adminPanel h1 {
+        color: #333333;
+        margin-bottom: 10px;
+        font-size: 1.5em;
+    }
+    
+    .adminPanelContent {
+        display: block;
+        
+       
+        width: 100%;
+    }
+    .expandedId, .expandedName,  .expandedEmail, .expandedCreateDate, .expandedUpdateDate{
+        text-align: left;
+    }
+    .expandedName {
+        text-align: left;
+    }
+}
+

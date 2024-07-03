@@ -2,14 +2,15 @@ import React from 'react';
 import TicketList from './TicketList';
 import '../AdminPanel.css';
 
-const AdminPanel = () =>{
-    return(
+const AdminPanel = () => {
+    return (
         <div className='adminPanel'>
             <h1>Admin Panel</h1>
-            <TicketList />
-
+            <div className='adminPanelContent'>
+                <TicketList />
+            </div>
         </div>
-    )
+    );
 }
 
-export default AdminPanel
+export default AdminPanel;

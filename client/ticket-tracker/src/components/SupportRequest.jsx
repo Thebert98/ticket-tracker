@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import API from "../api";
 import loadingImg from "../imgs/loading.gif";
-import "../App.css"; 
+import "../App.css";
+import { Snackbar, Alert } from '@mui/material';
 
 const SupportRequest = () => {
   const [formData, setFormData] = useState({
@@ -10,62 +11,76 @@ const SupportRequest = () => {
     description: "",
   });
 
+  const [inlineErrors, setInlineErrors] = useState({
+    name: false,
+    email: false,
+    description: false,
+  });
+
   const [ticketNumber, setTicketNumber] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
-  const handleNameChange = (e) => {
-    
-    setFormData({ ...formData, name: e.target.value });
-  }
-
-  const handleEmailChange = (e) => {
-    setFormData({ ...formData, email: e.target.value });
-  }
-
-  const handleDescriptionChange = (e) => {
-    setFormData({ ...formData, description: e.target.value });
-  }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInlineErrors((prevErrors) => ({ ...prevErrors, [name]: false }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleNewRequest = () => {
     setFormData({
-        name: "",
-        email: "",
-        description: "",
-      })
+      name: "",
+      email: "",
+      description: "",
+    });
     setTicketNumber(null);
-  }
-  const handleClearError = () =>{
-    setError(null)
-  }
+  };
+
+  const handleClearError = () => {
+    setError(null);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const trimmedName = formData.name.trim();
-    const trimmedEmail = formData.email.trim();
-    const trimmedDescription = formData.description.trim();
+    const trimmedData = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      description: formData.description.trim(),
+    };
 
-    if (!trimmedName || !trimmedEmail || !trimmedDescription) {
-      alert("All fields are required");
-      return
+    const newErrors = {
+      name: !trimmedData.name,
+      email: !trimmedData.email,
+      description: !trimmedData.description,
+    };
+
+    setInlineErrors(newErrors);
+
+    if (Object.values(newErrors).some((error) => error)) {
+      return;
     }
 
     setLoading(true);
-    API.post("/tickets", {
-      name: formData.name,
-      email: formData.email,
-      description: formData.description,
-    })
+    API.post("/tickets", trimmedData)
       .then((res) => {
         setTicketNumber(res.data.ticket[0].id);
         setLoading(false);
+        setSnackbarMessage("Ticket created successfully!");
+        setSnackbarOpen(true);
       })
       .catch((err) => {
-        console.log("Error retrieving tickets: " + err)
-        setError("Error retrieving tickets")
+        console.log("Error retrieving tickets: " + err);
+        setError("Error retrieving tickets");
         setLoading(false);
       });
+     
   };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+};
 
   if (loading) {
     return (
@@ -80,10 +95,11 @@ const SupportRequest = () => {
     return (
       <div className="error">
         <div className="createTicket">
-        <p>Error: {error}</p>
-        <button className="clearErrorButton" onClick={handleClearError}>Clear Error</button>
+          <p>Error: {error}</p>
+          <button className="clearErrorButton" onClick={handleClearError}>
+            Clear Error
+          </button>
         </div>
-        
       </div>
     );
   }
@@ -91,12 +107,16 @@ const SupportRequest = () => {
   if (ticketNumber) {
     return (
       <div className="ticketCreated">
+        <div className="centeredContainer">
         <h2>Your Service Request Ticket Has Been Created!</h2>
-        <h3><span>Service Request Ticket #{ticketNumber}</span></h3>
-        <h4>
-          We will review your request as soon as possible.
-        </h4>
-        <button onClick={handleNewRequest} className="newRequestButton">Start New Request</button>
+        <h3>
+          <span>Service Request Ticket ID: {ticketNumber}</span>
+        </h3>
+        <h4>We will review your request as soon as possible.</h4>
+        <button onClick={handleNewRequest} className="newRequestButton">
+          Start New Request
+        </button>
+        </div>
       </div>
     );
   }
@@ -104,34 +124,49 @@ const SupportRequest = () => {
   return (
     <div className="createTicket">
       <h2>Please fill out the following fields so that we may better assist you</h2>
+      {(inlineErrors.name || inlineErrors.email || inlineErrors.description) && (
+        <p className="inlineErrorMessage">All fields are required</p>
+      )}
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <input
-          onChange={handleNameChange}
+          onChange={handleInputChange}
           value={formData.name}
           name="name"
           type="text"
           id="name"
+          style={{ borderColor: inlineErrors.name ? "red" : "initial" }}
         />
         <label htmlFor="email">Email:</label>
         <input
-          onChange={handleEmailChange}
+          onChange={handleInputChange}
           value={formData.email}
           name="email"
           type="email"
           id="email"
+          style={{ borderColor: inlineErrors.email ? "red" : "initial" }}
         />
         <label htmlFor="description">Description of Issue:</label>
         <textarea
-          onChange={handleDescriptionChange}
+          onChange={handleInputChange}
           value={formData.description}
           name="description"
           id="description"
+          style={{ borderColor: inlineErrors.description ? "red" : "initial" }}
         />
         <input type="submit" value="Submit" />
       </form>
+      <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={6000}
+                    onClose={handleSnackbarClose}
+                >
+                    <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
     </div>
-  )
-}
+  );
+};
 
 export default SupportRequest;

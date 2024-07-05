@@ -98,7 +98,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #e0e0e0;
     font-size: 0.9em;
-    overflow: hidden; /* Prevent overflow */
+    overflow: hidden;
 }
 
 .expandedTicket {
@@ -110,7 +110,6 @@ body {
 .expandedTicketDetails {
     display: flex;
     justify-content: space-between;
-  
     align-items: center;
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 10px;
@@ -120,12 +119,13 @@ body {
 .expandedTicketDetails p {
     display: block;
     padding: 10px;
-    flex: 1 1 20%; /* Adjust flex property for equal width */
+    flex: 1 1 20%;
     margin: auto;
     text-align: center;
-    word-wrap: break-word; /* Prevent overflow */
+    word-wrap: break-word;
 }
-.timestamps{
+
+.timestamps {
     display: flex;
     align-items: center;
     margin: auto;
@@ -134,23 +134,23 @@ body {
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 10px;
     margin-bottom: 10px;
-    
 }
+
 .timestamps p {
     padding: 10px;
-    flex: 1 1 20%; /* Adjust flex property for equal width */
+    flex: 1 1 20%;
     margin: auto;
     display: flex;
     align-items: center;
     flex-direction: column;
-
 }
-.timestamps p span{
+
+.timestamps p span {
     font-weight: bold;
 }
 
 .expandedTicketDetails p span {
-    display: block; /* Ensure span is on top */
+    display: block;
     font-weight: bold;
 }
 
@@ -336,7 +336,6 @@ body {
     align-self: center;
 }
 
-
 .ticketListMobile li:hover {
     background-color: #f1f1f1;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -345,7 +344,6 @@ body {
 .ticketListMobile li div {
     display: flex;
     justify-content: space-between;
-
     margin-bottom: 10px;
 }
 
@@ -437,14 +435,11 @@ body {
 .ticketListMobile .ticketStatusMobile {
     margin-top: 10px;
     display: flex;
-    
     flex-direction: column;
-   
 }
 
 .ticketListMobile label {
     text-align: center;
-
     font-weight: bold;
     color: #333333;
 }
@@ -516,13 +511,11 @@ body {
     color: red;
 }
 
-/* New styles for mobile view */
-
 .expandedTicketDetailsMobile {
     text-align: left;
     display: block;
     flex-direction: column;
-    width: 100%; /* Ensure it takes full width */
+    width: 100%;
     align-items: flex-start;
 }
 
@@ -532,7 +525,7 @@ body {
     color: #333333;
     display: flex;
     align-items: center;
-    width: 100%; /* Ensure it takes full width */
+    width: 100%;
 }
 
 .expandedTicketDetailsMobile p span {
@@ -541,22 +534,19 @@ body {
 }
 
 .expandedTicketDescriptionMobile {
-   
     width: 100%;
-
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
-    border-top: 1px solid #e0e0e0; 
-    border-bottom: 1px solid #e0e0e0;    
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .expandedTicketDescriptionMobile p {
-    
     padding: 10px;
-    flex: 1 1 20%; /* Adjust flex property for equal width */
+    flex: 1 1 20%;
     margin: auto;
     display: flex;
     align-items: center;
@@ -568,7 +558,6 @@ body {
     font-weight: bold;
 }
 
-/* Responsive styles for mobile view */
 @media (max-width: 768px) {
     .ticketListMobile {
         padding: 5px;
@@ -609,28 +598,28 @@ body {
         padding: 6px 12px;
         font-size: 0.8em;
     }
+
     .adminPanel {
         text-align: center;
         padding: 10px;
     }
-    
+
     .adminPanel h1 {
         color: #333333;
         margin-bottom: 10px;
         font-size: 1.5em;
     }
-    
+
     .adminPanelContent {
         display: block;
-        
-       
         width: 100%;
     }
-    .expandedId, .expandedName,  .expandedEmail, .expandedCreateDate, .expandedUpdateDate{
+
+    .expandedId, .expandedName, .expandedEmail, .expandedCreateDate, .expandedUpdateDate {
         text-align: left;
     }
+
     .expandedName {
         text-align: left;
     }
 }
-

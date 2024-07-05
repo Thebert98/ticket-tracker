@@ -194,7 +194,7 @@ const TicketList = () => {
             </div>
         );
     }
-    if(tickets.length == 0){
+    if(tickets.length === 0){
         return(
         
         <div className="ticketListMobile">
@@ -325,9 +325,9 @@ const TicketList = () => {
                                     <p className="expandedId"><span>Ticket ID:</span> {ticket.id}</p>
                                     <p className="expandedName"><span>Requestor's Name:</span> {ticket.name}</p>
                                     <p className="expandedEmail"><span>Requestor's Email:</span> {ticket.email}</p>
-                                    <p className="expandedCreateDate"><span>Created On:</span> {ticket.created_at.split("T")[0]}</p>
+                                    <p className="expandedCreateDate"><span>Created On:</span> {ticket.created_at.split("T")[0].split("-")[1]}-{ticket.created_at.split("T")[0].split("-")[2]}-{ticket.created_at.split("T")[0].split("-")[0]}</p>
                                     {ticket.updated_at &&
-                                        <p className="expandedUpdateDate"><span>Last Updated On:</span> {ticket.updated_at.split("T")[0]}</p>
+                                        <p className="expandedUpdateDate"><span>Last Updated On:</span> {ticket.updated_at.split("T")[0].split("-")[1]}-{ticket.updated_at.split("T")[0].split("-")[2]}-{ticket.updated_at.split("T")[0].split("-")[0]}</p>
                                     }
                                     <div className="expandedTicketDescriptionMobile">
                                         <p><span>Description of Issue:</span> {ticket.description}</p>

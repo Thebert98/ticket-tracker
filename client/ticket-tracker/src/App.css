@@ -48,6 +48,16 @@
 .logo-link img {
   height: 70px;
 }
+.loading img {
+  border-radius: 100px    ;
+  width: 80px;
+  height: 80px;
+}
+.loading {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
 
 .nav-link {
   text-decoration: none;
@@ -60,7 +70,7 @@
 }
 
 .landingPage {
-  margin-top: 150px;
+  margin:auto;
   text-align: center;
   align-content: center;
 }
@@ -101,7 +111,10 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
+.error {
+  color: red;
+  text-align: center;
+}
 .error button,
 .createTicket input[type="submit"] {
   background-color: #3e8e7e;
@@ -168,10 +181,7 @@
   background-color: #60b8a4;
 }
 
-.error {
-  color: red;
-  text-align: center;
-}
+
 
 @keyframes App-logo-spin {
   from {

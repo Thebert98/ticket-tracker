@@ -20,12 +20,11 @@ const TicketList = () => {
     const [snackbarMessage, setSnackbarMessage] = useState("");
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const ticketsPerPage = 5;
+    const handleResize = () => setWindowWidth(window.innerWidth);
 
     useEffect(() => {
         getTickets();
-        const handleResize = () => setWindowWidth(window.innerWidth);
         window.addEventListener('resize', handleResize);
-
         const ticketUpdateSubscription = getTicketUpdateSubscription();
         const ticketInsertSubscription = getTicketInsertSubscription();
 

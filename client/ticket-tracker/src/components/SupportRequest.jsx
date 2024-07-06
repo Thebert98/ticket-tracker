@@ -22,6 +22,7 @@ const SupportRequest = () => {
   const [error, setError] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
